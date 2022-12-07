@@ -1,0 +1,23 @@
+{
+  "name": "lucci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Happykiller/lucci.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Happykiller/lucci/issues"
+  },
+  "homepage": "https://github.com/Happykiller/lucci#readme",
+  "dependencies": {
+    "highcharts": "^10.3.2"
+  }
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Résiliance</title>
+  </head>
+  <body>
+    <figure class="highcharts-figure">
+      <div id="container" style="height: 600px; width: 700px"></div>
+    </figure>
+    <div>
+      <span>Formation interne possible</span>
+      <table id='tabFor'>
+        <tr>
+          <th width="15%">Connaissances</th>
+          <th width="15%">Formateur</th>
+          <th>Elèves</th>
+        </tr>
+      </table>
+    </div>
+    <figure class="highcharts-figure">
+      <div id="container2" style="height: 600px; width: 700px"></div>
+    </figure>
+  </body>
+  
+  <script type="module">
+    import { Lucci } from './src/index.js';
+    import datas from './src/datas.json' assert { type: "json" };
+
+    const lucci = new Lucci();
+
+    console.log(lucci.getRealMetric())
+
+    var table = document.getElementById("tabFor");
+
+    for(const indicator in lucci.getRealMetric()) {
+      if(lucci.getRealMetric()[indicator].referent !== '' && lucci.getRealMetric()[indicator].students.length > 0) {
+        var row = table.insertRow();
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        var cell3 = row.insertCell();
+        cell1.innerHTML = indicator;
+        cell2.innerHTML = lucci.getRealMetric()[indicator].referent;
+        cell3.innerHTML = lucci.getRealMetric()[indicator].students;
+      }
+    }
+
+  Highcharts.chart('container', {
+
+chart: {
+    polar: true,
+    type: 'line'
+},
+
+title: {
+    text: 'Matrice des compétences Delivery'
+},
+
+xAxis: {
+  categories: lucci.getKnowledges(),
+  tickmarkPlacement: 'on',
+  lineWidth: 0
+},
+
+yAxis: {
+          min: 0,
+          max: 4,
+          gridLineInterpolation: 'polygon',
+},
+
+tooltip: {
+          style: {
+            pointerEvents: 'auto'
+          },
+          formatter: function (pointInterval, tooltip) {
+            return `<span>${this.point.series.name} pour ${this.x}: ${this.y}</span><br/>`;
+          }
+        },
+
+series: [{
+    type: 'line',
+    name: 'Niveau possible',
+    color: '#e67e22',
+    data: lucci.getLevelMaxs()
+},{
+    type: 'line',
+    name: 'Niveau actuel',
+    color: '#2980b9',
+    data: lucci.getLevels()
+},{
+    type: 'line',
+    name: 'Niveau requis',
+    color: '#c0392b',
+    data: lucci.getKnowledges().map(knowledge => datas.projet.level)
+}]
+});
+
+Highcharts.chart('container2', {
+
+chart: {
+    polar: true,
+    type: 'line'
+},
+
+title: {
+    text: 'Matrice de résilience Delivery'
+},
+
+subtitle: {
+        text: 'Le nombre de personne au dessus du niveau minimum'
+    },
+
+xAxis: {
+  categories: lucci.getKnowledges(),
+  tickmarkPlacement: 'on',
+  lineWidth: 0
+},
+
+yAxis: {
+          min: 0,
+          max: 4,
+          gridLineInterpolation: 'polygon',
+},
+
+tooltip: {
+          style: {
+            pointerEvents: 'auto'
+          },
+          formatter: function (pointInterval, tooltip) {
+            return `<span>${this.point.series.name} pour ${this.x}: ${this.y}</span><br/>`;
+          }
+        },
+
+series: [{
+    type: 'line',
+    name: 'Niveau actuel',
+    color: '#2980b9',
+    data: lucci.getPeoples()
+},{
+    type: 'line',
+    name: 'SPOF',
+    color: '#c0392b',
+    data: lucci.getKnowledges().map(knowledge => datas.projet.level)
+}]
+});
+  </script>
+
+</html>

@@ -1,0 +1,489 @@
+{
+  "projet": {
+    "spof": 2.5,
+    "level": 2,
+    "knowledgePrio": {
+      "angular":  3,
+      "vuejs": 3,
+      "nestjs": 2,
+      "graphql": 2,
+      "git": 2,
+      "linux": 2,
+      "mongo": 1,
+      "maria": 1,
+      "docker": 1,
+      "kubernetes": 1,
+      "iptable": 3,
+      "networkmanager": 3,
+      "openvpn": 1,
+      "strongswan": 1,
+      "bash": 2,
+      "iproute": 3,
+      "rabbitmq": 1,
+      "kea": 1,
+      "minio": 1,
+      "redis": 1,
+      "apollo": 1,
+      "ansible": 1,
+      "jira": 1,
+      "confluence": 1,
+      "gitlab": 1,
+      "vscode": 1,
+      "virtualbox": 1,
+      "trello": 1,
+      "metier": 2
+    }
+  },
+  "peoples": {
+    "fabrice": {
+      "active": true,
+      "knowledge": {
+        "angular": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "vuejs": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "nestjs": {
+          "learn": true,
+          "teach": true,
+          "skill": 4
+        },
+        "graphql": {
+          "learn": true,
+          "teach": true,
+          "skill": 3
+        },
+        "git": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "linux": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "mongo": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "maria": {
+          "learn": true,
+          "teach": true,
+          "skill": 3
+        },
+        "docker": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "kubernetes": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "iptable": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "networkmanager": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "openvpn": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "strongswan": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "bash": {
+          "learn": true,
+          "teach": true,
+          "skill": 3
+        },
+        "iproute": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "rabbitmq": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "kea": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "minio": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "redis": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "apollo": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "ansible": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "jira": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "confluence": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "gitlab": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "vscode": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "virtualbox": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "trello": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "metier": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        }
+      }
+    },
+    "charly": {
+      "active": true,
+      "knowledge": {
+        "angular": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "vuejs": {
+          "learn": true,
+          "teach": true,
+          "skill": 3
+        },
+        "nestjs": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "graphql": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "git": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "linux": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "mongo": {
+          "learn": true,
+          "teach": true,
+          "skill": 0
+        },
+        "maria": {
+          "learn": true,
+          "teach": true,
+          "skill": 0
+        },
+        "docker": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "kubernetes": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "iptable": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "networkmanager": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "openvpn": {
+          "learn": false,
+          "teach": false,
+          "skill": 1
+        },
+        "strongswan": {
+          "learn": false,
+          "teach": false,
+          "skill": 1
+        },
+        "bash": {
+          "learn": false,
+          "teach": false,
+          "skill": 3
+        },
+        "iproute": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "rabbitmq": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "kea": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "minio": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "redis": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "apollo": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "ansible": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "jira": {
+          "learn": true,
+          "teach": false,
+          "skill": 2
+        },
+        "confluence": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "gitlab": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "vscode": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "virtualbox": {
+          "learn": true,
+          "teach": false,
+          "skill": 2
+        },
+        "trello": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "metier": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        }
+      }
+    },
+    "ian": {
+      "active": true,
+      "knowledge": {
+        "angular": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "vuejs": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "nestjs": {
+          "learn": true,
+          "teach": true,
+          "skill": 2
+        },
+        "graphql": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "git": {
+          "learn": true,
+          "teach": true,
+          "skill": 1
+        },
+        "linux": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "mongo": {
+          "learn": true,
+          "teach": true,
+          "skill": 0
+        },
+        "maria": {
+          "learn": true,
+          "teach": true,
+          "skill": 0
+        },
+        "docker": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "kubernetes": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "iptable": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "networkmanager": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "openvpn": {
+          "learn": false,
+          "teach": false,
+          "skill": 1
+        },
+        "strongswan": {
+          "learn": false,
+          "teach": false,
+          "skill": 1
+        },
+        "bash": {
+          "learn": false,
+          "teach": false,
+          "skill": 3
+        },
+        "iproute": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "rabbitmq": {
+          "learn": true,
+          "teach": false,
+          "skill": 0
+        },
+        "kea": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "minio": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "redis": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "apollo": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "ansible": {
+          "learn": false,
+          "teach": false,
+          "skill": 0
+        },
+        "jira": {
+          "learn": true,
+          "teach": false,
+          "skill": 2
+        },
+        "confluence": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "gitlab": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        },
+        "vscode": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "virtualbox": {
+          "learn": true,
+          "teach": false,
+          "skill": 2
+        },
+        "trello": {
+          "learn": true,
+          "teach": false,
+          "skill": 3
+        },
+        "metier": {
+          "learn": true,
+          "teach": false,
+          "skill": 1
+        }
+      }
+    }
+  }
+}

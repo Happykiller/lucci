@@ -1,25 +1,24 @@
 {
   "projet": {
     "spof": 2.5,
-    "level": 2,
     "knowledgePrio": {
       "angular":  3,
       "vuejs": 3,
       "nestjs": 2,
       "graphql": 2,
       "git": 2,
-      "linux": 2,
+      "linux": 3,
       "mongo": 1,
       "maria": 1,
-      "docker": 1,
-      "kubernetes": 1,
+      "docker": 2,
+      "kubernetes": 2,
       "iptable": 3,
       "networkmanager": 3,
       "openvpn": 1,
       "strongswan": 1,
       "bash": 2,
       "iproute": 3,
-      "rabbitmq": 1,
+      "rabbitmq": 2,
       "kea": 1,
       "minio": 1,
       "redis": 1,
@@ -32,12 +31,12 @@
       "virtualbox": 1,
       "trello": 1,
       "metier": 2,
-      "scrum": 2
+      "scrum": 1
     }
   },
   "peoples": {
     "fabrice": {
-      "active": true,
+      "active": false,
       "knowledge": {
         "angular": {
           "learn": true,
@@ -532,7 +531,7 @@
         "linux": {
           "learn": true,
           "teach": true,
-          "skill": 3
+          "skill": 2
         },
         "mongo": {
           "learn": true,

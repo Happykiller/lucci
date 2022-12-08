@@ -7,6 +7,8 @@ export class Lucci {
   levels;
   levelMaxs;
   peopleUpLevel;
+  resiIndicators;
+  resiKnowledges;
 
   constructor() {
     this.getRealMetric();
@@ -37,7 +39,7 @@ export class Lucci {
         const skills = datas.peoples[people].knowledge;
         for (let skill in skills) {
           if(skills[skill].skill > 0) {
-            if(this.indicators[skill].level >= datas.projet.level) {
+            if(this.indicators[skill].level >= (datas.projet.knowledgePrio[skill] + 1)) {
               this.indicators[skill].peopleUpLevel++;
             }
             this.indicators[skill].peoples++;
@@ -45,8 +47,6 @@ export class Lucci {
             this.indicators[skill].levelAve = Math.round(this.indicators[skill].level / this.indicators[skill].peoples * 100) /100;
             if((skills[skill].skill > this.indicators[skill].levelMax) && (skills[skill].teach)) {
               this.indicators[skill].referent = people;
-            }
-            if(skills[skill].skill > this.indicators[skill].levelMax) {
               this.indicators[skill].levelMax = skills[skill].skill;
             }
             if((this.indicators[skill].referent !== people) && (skills[skill].learn)) {
@@ -56,6 +56,48 @@ export class Lucci {
         }
       }
     }
+
+    for (let knowledge in this.getRealMetric()) {
+      if(this.getRealMetric()[knowledge].levelMax === 0) {
+        this.getRealMetric()[knowledge].levelMax = this.indicators[knowledge].levelAve;
+      }
+    }
+  }
+
+  getResiIndicators() {
+    if(!this.resiIndicators) {
+      this.resiIndicators = [];
+      this.resiKnowledges = [];
+    } else {
+      return this.resiIndicators;
+    }
+
+    for (let knowledge in this.getRealMetric()) {
+      if(this.getRealMetric()[knowledge].prio >= 2) {
+        this.resiKnowledges.push(knowledge);
+        this.resiIndicators.push(this.indicators[knowledge].peopleUpLevel);
+      }
+    }
+
+    return this.resiIndicators;
+  }
+
+  getResiKnowledges() {
+    if(!this.resiIndicators) {
+      this.resiIndicators = [];
+      this.resiKnowledges = [];
+    } else {
+      return this.resiKnowledges;
+    }
+
+    for (let knowledge in this.getRealMetric()) {
+      if(this.getRealMetric()[knowledge].prio >= 2) {
+        this.resiKnowledges.push(knowledge);
+        this.resiIndicators.push(this.indicators[knowledge].peopleUpLevel);
+      }
+    }
+
+    return this.resiKnowledges; 
   }
 
   getKnowledges() {

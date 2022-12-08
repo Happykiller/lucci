@@ -113,4 +113,12 @@ export class Lucci {
 
     return this.peopleUpLevel;
   }
+
+  getPrio(knowledge) {
+    const colors = ["#2980b9", "#e67e22", "#e74c3c"];
+
+    const prio = datas.projet.knowledgePrio[knowledge];
+
+    return colors[prio - 1];
+  }
 }

@@ -23,12 +23,12 @@
   tr:nth-child(even) {
     background-color: #dddddd;
   }
-  </style>
+</style>
 
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Résiliance</title>
+    <title>Résilience</title>
   </head>
   <body>
     <figure class="highcharts-figure">
@@ -65,110 +65,106 @@
         var cell1 = row.insertCell();
         var cell2 = row.insertCell();
         var cell3 = row.insertCell();
-        cell1.innerHTML = indicator;
+        cell1.innerHTML = `<span style="font-weight: bold;color:${lucci.getPrio(indicator)}">${indicator}</span>`;
         cell2.innerHTML = lucci.getRealMetric()[indicator].referent;
         cell3.innerHTML = lucci.getRealMetric()[indicator].students;
       }
     }
 
   Highcharts.chart('container', {
-
-chart: {
-    polar: true,
-    type: 'line'
-},
-
-title: {
-    text: 'Matrice des compétences Delivery'
-},
-
-xAxis: {
-  categories: lucci.getKnowledges(),
-  tickmarkPlacement: 'on',
-  lineWidth: 0
-},
-
-yAxis: {
-          min: 0,
-          max: 4,
-          gridLineInterpolation: 'polygon',
-},
-
-tooltip: {
-          style: {
-            pointerEvents: 'auto'
-          },
-          formatter: function (pointInterval, tooltip) {
-            return `<span>${this.point.series.name} pour ${this.x}: ${this.y}</span><br/>`;
-          }
-        },
-
-series: [{
-    type: 'line',
-    name: 'Niveau possible',
-    color: '#e67e22',
-    data: lucci.getLevelMaxs()
-},{
-    type: 'line',
-    name: 'Niveau actuel',
-    color: '#2980b9',
-    data: lucci.getLevels()
-},{
-    type: 'line',
-    name: 'Niveau requis',
-    color: '#c0392b',
-    data: lucci.getKnowledges().map(knowledge => datas.projet.level)
-}]
-});
-
-Highcharts.chart('container2', {
-
-chart: {
-    polar: true,
-    type: 'line'
-},
-
-title: {
-    text: 'Matrice de résilience Delivery'
-},
-
-subtitle: {
-        text: 'Le nombre de personne au dessus du niveau minimum'
+    chart: {
+      polar: true,
+      type: 'line'
     },
-
-xAxis: {
-  categories: lucci.getKnowledges(),
-  tickmarkPlacement: 'on',
-  lineWidth: 0
-},
-
-yAxis: {
-          min: 0,
-          max: 4,
-          gridLineInterpolation: 'polygon',
-},
-
-tooltip: {
-          style: {
-            pointerEvents: 'auto'
-          },
-          formatter: function (pointInterval, tooltip) {
-            return `<span>${this.point.series.name} pour ${this.x}: ${this.y}</span><br/>`;
-          }
+    title: {
+      text: 'Matrice des compétences Delivery'
+    },
+    xAxis: {
+      categories: lucci.getKnowledges(),
+      tickmarkPlacement: 'on',
+      lineWidth: 0,
+      labels: {
+        formatter: function() {
+            return `<span style="font-weight: bold;color:${lucci.getPrio(this.value)}">${this.value}</span>`;
         },
+      }
+    },
+    yAxis: {
+      min: 0,
+      max: 4,
+      gridLineInterpolation: 'polygon',
+    },
+    tooltip: {
+      style: {
+        pointerEvents: 'auto'
+      },
+      formatter: function (pointInterval, tooltip) {
+        return `${this.point.series.name} pour <span style="font-weight: bold;color:${lucci.getPrio(this.x)}">${this.x}</span> : ${this.y}`;
+      }
+    },
+    series: [{
+      type: 'line',
+      name: 'Niveau possible',
+      color: '#e67e22',
+      data: lucci.getLevelMaxs()
+    },{
+      type: 'line',
+      name: 'Niveau actuel',
+      color: '#2980b9',
+      data: lucci.getLevels()
+    },{
+      type: 'line',
+      name: 'Niveau requis',
+      color: '#c0392b',
+      data: lucci.getKnowledges().map(knowledge => datas.projet.level)
+    }]
+  });
 
-series: [{
-    type: 'line',
-    name: 'Niveau actuel',
-    color: '#2980b9',
-    data: lucci.getPeoples()
-},{
-    type: 'line',
-    name: 'SPOF',
-    color: '#c0392b',
-    data: lucci.getKnowledges().map(knowledge => datas.projet.level)
-}]
-});
+  Highcharts.chart('container2', {
+    chart: {
+      polar: true,
+      type: 'line'
+    },
+    title: {
+      text: 'Matrice de résilience Delivery'
+    },
+    subtitle: {
+      text: 'Le nombre de personne au dessus du niveau minimum'
+    },
+    xAxis: {
+      categories: lucci.getKnowledges(),
+      tickmarkPlacement: 'on',
+      lineWidth: 0,
+      labels: {
+        formatter: function() {
+            return `<span style="font-weight: bold;color:${lucci.getPrio(this.value)}">${this.value}</span>`;
+        },
+      }
+    },
+    yAxis: {
+      min: 0,
+      max: 4,
+      gridLineInterpolation: 'polygon',
+    },
+    tooltip: {
+      style: {
+        pointerEvents: 'auto'
+      },
+      formatter: function (pointInterval, tooltip) {
+        return `${this.point.series.name} pour <span style="font-weight: bold;color:${lucci.getPrio(this.x)}">${this.x}</span> : ${this.y}`;
+      }
+    },
+    series: [{
+        type: 'line',
+        name: 'Niveau actuel',
+        color: '#2980b9',
+        data: lucci.getPeoples()
+    },{
+        type: 'line',
+        name: 'SPOF',
+        color: '#c0392b',
+        data: lucci.getKnowledges().map(knowledge => datas.projet.level)
+    }]
+  });
   </script>
-
 </html>

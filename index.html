@@ -206,14 +206,14 @@
     },
     series: [{
         type: 'line',
-        name: 'Niveau actuel',
-        color: '#2980b9',
-        data: lucci.getResiIndicators()
-    },{
-        type: 'line',
         name: 'SPOF',
         color: '#c0392b',
         data: lucci.getResiKnowledges().map(knowledge => datas.projet.spof)
+    },{
+        type: 'line',
+        name: 'Niveau actuel',
+        color: '#2980b9',
+        data: lucci.getResiIndicators()
     }]
   });
   </script>

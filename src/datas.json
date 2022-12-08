@@ -1,6 +1,6 @@
 {
   "projet": {
-    "spof": 2.5,
+    "spof": 2,
     "knowledgePrio": {
       "angular":  3,
       "vuejs": 3,

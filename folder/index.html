@@ -7,49 +7,14 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-</style>
-
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Résilience</title>
+    <title>Sport</title>
   </head>
   <body>
     <figure class="highcharts-figure">
-      <div id="container" style="height: 600px; width: 700px"></div>
-    </figure>
-    <figure class="highcharts-figure">
-      <div id="container3" style="height: 600px; width: 700px"></div>
-    </figure>
-    <div>
-      <span>Formation interne possible</span>
-      <table id='tabFor'>
-        <tr>
-          <th width="15%">Connaissances</th>
-          <th width="15%">ROI</th>
-          <th width="15%">Formateur</th>
-          <th>Elèves</th>
-        </tr>
-      </table>
-    </div>
-    <figure class="highcharts-figure">
-      <div id="container2" style="height: 600px; width: 700px"></div>
+      <div id="container" style="height: 700px; width: 100%"></div>
     </figure>
   </body>
   
@@ -59,162 +24,131 @@
 
     const lucci = new Lucci();
 
-    console.log(lucci.getRealMetric())
+    console.log(lucci.getMetrics())
 
-    var table = document.getElementById("tabFor");
-
-    for(const indicator in lucci.getRealMetric()) {
-      if((lucci.getRealMetric()[indicator].referent !== '' && lucci.getRealMetric()[indicator].students.length > 0)
-       && ((lucci.getRealMetric()[indicator].levelMax - lucci.getRealMetric()[indicator].levelAve) !== 0)
-       &&  datas.projet.knowledgePrio[indicator] >= 2
-      ) {
-        let rio = (lucci.getRealMetric()[indicator].levelMax - lucci.getRealMetric()[indicator].levelAve) * datas.projet.knowledgePrio[indicator];
-        rio = Math.round(rio * 100) /100;
-
-        var row = table.insertRow();
-        var cell1 = row.insertCell();
-        var cell2 = row.insertCell();
-        var cell3 = row.insertCell();
-        var cell4 = row.insertCell();
-        cell1.innerHTML = `<span style="font-weight: bold;color:${lucci.getPrio(indicator)}">${indicator}</span>`;
-        cell2.innerHTML = rio;
-        cell3.innerHTML = lucci.getRealMetric()[indicator].referent;
-        cell4.innerHTML = lucci.getRealMetric()[indicator].students;
-      }
-    }
-
-  Highcharts.chart('container', {
-    chart: {
-      polar: true,
-      type: 'line'
-    },
-    title: {
-      text: 'Matrice des compétences Delivery'
-    },
-    xAxis: {
-      categories: lucci.getKnowledges(),
-      tickmarkPlacement: 'on',
-      lineWidth: 0,
-      labels: {
-        formatter: function() {
-            return `<span style="font-weight: bold;color:${lucci.getPrio(this.value)}">${this.value}</span>`;
-        },
-      }
-    },
-    yAxis: {
-      min: 0,
-      max: 4,
-      gridLineInterpolation: 'polygon',
-    },
-    tooltip: {
-      style: {
-        pointerEvents: 'auto'
+    Highcharts.chart('container', {
+      chart: {},
+      title: {
+        text: 'Le gras de Fabrice',
+        align: 'left'
       },
-      formatter: function (pointInterval, tooltip) {
-        return `${this.point.series.name} pour <span style="font-weight: bold;color:${lucci.getPrio(this.x)}">${this.x}</span> : ${this.y}`;
-      }
-    },
-    series: [{
-      type: 'line',
-      name: 'Niveau actuel',
-      color: '#2980b9',
-      data: lucci.getLevels()
-    },{
-      type: 'line',
-      name: 'Niveau requis',
-      color: '#c0392b',
-      data: lucci.getKnowledges().map(knowledge => datas.projet.knowledgePrio[knowledge] + 1)
-    }]
-  });
-
-  Highcharts.chart('container3', {
-    chart: {
-      polar: true,
-      type: 'line'
-    },
-    title: {
-      text: 'Matrice des compétences potentiel Delivery'
-    },
-    xAxis: {
-      categories: lucci.getKnowledges(),
-      tickmarkPlacement: 'on',
-      lineWidth: 0,
-      labels: {
-        formatter: function() {
-            return `<span style="font-weight: bold;color:${lucci.getPrio(this.value)}">${this.value}</span>`;
-        },
-      }
-    },
-    yAxis: {
-      min: 0,
-      max: 4,
-      gridLineInterpolation: 'polygon',
-    },
-    tooltip: {
-      style: {
-        pointerEvents: 'auto'
+      subtitle: {
+        text: 'Le gras c\'est la vie',
+        align: 'left'
       },
-      formatter: function (pointInterval, tooltip) {
-        return `${this.point.series.name} pour <span style="font-weight: bold;color:${lucci.getPrio(this.x)}">${this.x}</span> : ${this.y}`;
-      }
-    },
-    series: [{
-      type: 'line',
-      name: 'Niveau possible',
-      color: '#e67e22',
-      data: lucci.getLevelMaxs()
-    },{
-      type: 'line',
-      name: 'Niveau requis',
-      color: '#c0392b',
-      data: lucci.getKnowledges().map(knowledge => datas.projet.knowledgePrio[knowledge] + 1)
-    }]
-  });
-
-  Highcharts.chart('container2', {
-    chart: {
-      polar: true,
-      type: 'line'
-    },
-    title: {
-      text: 'Matrice de résilience Delivery'
-    },
-    subtitle: {
-      text: 'Le nombre de personne au dessus du niveau minimum'
-    },
-    xAxis: {
-      categories: lucci.getResiKnowledges(),
-      tickmarkPlacement: 'on',
-      lineWidth: 0,
-      labels: {
-        formatter: function() {
-            return `<span style="font-weight: bold;color:${lucci.getPrio(this.value)}">${this.value}</span>`;
-        },
-      }
-    },
-    yAxis: {
-      min: 0,
-      gridLineInterpolation: 'polygon',
-    },
-    tooltip: {
-      style: {
-        pointerEvents: 'auto'
+      xAxis: [{
+          categories: lucci.getDates(),
+          crosshair: true
+      }],
+      yAxis: [
+        { // Time
+          labels: {
+            formatter: function () {
+              return lucci.convertToTime(this.value);
+            },
+            style: {
+              color: Highcharts.getOptions().colors[2]
+            }
+          },
+          title: {
+            text: 'Time',
+            style: {
+              color: Highcharts.getOptions().colors[2]
+            }
+          },
+          opposite: true
+        }, { // Distance
+          gridLineWidth: 0,
+          title: {
+            text: 'Distance',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          },
+          labels: {
+            format: '{value}m',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          }
+        }, { // Calories
+          gridLineWidth: 0,
+          title: {
+            text: 'Calories',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          },
+          labels: {
+            format: '{value}cal',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          },
+          opposite: true
+        }, { // distOnCal
+          gridLineWidth: 0,
+          title: {
+            text: 'Performance',
+            style: {
+              color: Highcharts.getOptions().colors[3]
+            }
+          },
+          labels: {
+            format: '{value}cal/min',
+            style: {
+              color: Highcharts.getOptions().colors[3]
+            }
+          },
+          opposite: true
+        }
+      ],
+      tooltip: {
+        shared: true
       },
-      formatter: function (pointInterval, tooltip) {
-        return `${this.point.series.name} pour <span style="font-weight: bold;color:${lucci.getPrio(this.x)}">${this.x}</span> : ${this.y}`;
-      }
-    },
-    series: [{
-        type: 'line',
-        name: 'SPOF',
-        color: '#c0392b',
-        data: lucci.getResiKnowledges().map(knowledge => datas.projet.spof)
-    },{
-        type: 'line',
-        name: 'Niveau actuel',
-        color: '#2980b9',
-        data: lucci.getResiIndicators()
-    }]
+      legend: {
+        layout: 'vertical',
+        align: 'left',
+        x: 80,
+        verticalAlign: 'top',
+        y: 55,
+        floating: true,
+        backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+      },
+      series: [
+        {
+          name: 'Time',
+          type: 'spline',
+          data: lucci.getTimes(),
+          tooltip: {
+            valueSuffix: 'ss'
+          }
+        }, {
+          name: 'Distance',
+          type: 'spline',
+          yAxis: 1,
+          data: lucci.getDistances(),
+          tooltip: {
+            valueSuffix: 'm'
+          }
+        }, {
+          name: 'Calories',
+          type: 'spline',
+          yAxis: 2,
+          data: lucci.getCalories(),
+          tooltip: {
+            valueSuffix: 'cal'
+          }
+        }, {
+          name: 'Performance',
+          type: 'spline',
+          yAxis: 3,
+          data: lucci.getDistOnCals(),
+          tooltip: {
+            valueSuffix: 'cal/min'
+          }
+        }
+      ],
   });
   </script>
 </html>

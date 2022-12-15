@@ -2,165 +2,119 @@ import datas from '../datas.json' assert { type: "json" };
 
 export class Lucci {
 
-  indicators;
-  knowledges;
-  levels;
-  levelMaxs;
-  peopleUpLevel;
-  resiIndicators;
-  resiKnowledges;
+  metrics;
+  dates;
+  times;
+  distOnCals;
 
   constructor() {
-    this.getRealMetric();
+    this.getMetrics();
   }
 
-  getRealMetric() {
-    if(!this.indicators) {
-      this.indicators = {};
+  getMetrics() {
+    if(!this.metrics) {
+      this.metrics = [];
     } else {
-      return this.indicators;
+      return this.metrics;
     }
 
-    for (let knowledge of this.getKnowledges()) {
-      this.indicators[knowledge] = {
-        prio: datas.projet.knowledgePrio[knowledge],
-        peopleUpLevel: 0,
-        peoples: 0,
-        level: 0,
-        levelAve: 0,
-        levelMax: 0,
-        referent: '',
-        students: []
-      }
-    }
+    for (let day of datas.datas) {
+      // time
+      const [minutes, seconds] = day.time.split(':');
+      const [kilometre, metre] = day.distance.split('.');
+      const time = this.convertToSeconds(minutes, seconds);
+      const distance = kilometre * 1000 + metre * 10;
+      const calorie = parseInt(day.calories);
+      const distOnCal = Math.round(calorie / (time/60));
 
-    for (let people in datas.peoples) {
-      if(datas.peoples[people].active) {
-        const skills = datas.peoples[people].knowledge;
-        for (let skill in skills) {
-          if(skills[skill].skill > 0) {
-            if(this.indicators[skill].level >= (datas.projet.knowledgePrio[skill] + 1)) {
-              this.indicators[skill].peopleUpLevel++;
-            }
-            this.indicators[skill].peoples++;
-            this.indicators[skill].level += skills[skill].skill;
-            this.indicators[skill].levelAve = Math.round(this.indicators[skill].level / this.indicators[skill].peoples * 100) /100;
-            if((skills[skill].skill > this.indicators[skill].levelMax) && (skills[skill].teach)) {
-              this.indicators[skill].referent = people;
-              this.indicators[skill].levelMax = skills[skill].skill;
-            }
-            if((this.indicators[skill].referent !== people) && (skills[skill].learn)) {
-              this.indicators[skill].students.push(people);
-            }
-          }
-        }
-      }
-    }
-
-    for (let knowledge in this.getRealMetric()) {
-      if(this.getRealMetric()[knowledge].levelMax === 0) {
-        this.getRealMetric()[knowledge].levelMax = this.indicators[knowledge].levelAve;
-      }
+      this.metrics.push({
+        date: day.date,
+        level: day.level,
+        time: time,
+        distance: distance,
+        calories: calorie,
+        distOnCal: distOnCal
+      });
     }
   }
 
-  getResiIndicators() {
-    if(!this.resiIndicators) {
-      this.resiIndicators = [];
-      this.resiKnowledges = [];
+  convertToSeconds(minutes, seconds) {
+    return 60 + Number(minutes) * 60 + Number(seconds);
+  }
+
+  convertToTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds}`;
+  }
+
+  getDates() {
+    if(!this.dates) {
+      this.dates = [];
     } else {
-      return this.resiIndicators;
+      return this.dates;
     }
 
-    for (let knowledge in this.getRealMetric()) {
-      if(this.getRealMetric()[knowledge].prio >= 2) {
-        this.resiKnowledges.push(knowledge);
-        this.resiIndicators.push(this.indicators[knowledge].peopleUpLevel);
-      }
+    for (let day of this.metrics) {
+      this.dates.push(day.date);
     }
 
-    return this.resiIndicators;
+    return this.dates;
   }
 
-  getResiKnowledges() {
-    if(!this.resiIndicators) {
-      this.resiIndicators = [];
-      this.resiKnowledges = [];
+  getTimes() {
+    if(!this.times) {
+      this.times = [];
     } else {
-      return this.resiKnowledges;
+      return this.times;
     }
 
-    for (let knowledge in this.getRealMetric()) {
-      if(this.getRealMetric()[knowledge].prio >= 2) {
-        this.resiKnowledges.push(knowledge);
-        this.resiIndicators.push(this.indicators[knowledge].peopleUpLevel);
-      }
+    for (let day of this.metrics) {
+      this.times.push(day.time);
     }
 
-    return this.resiKnowledges; 
+    return this.times;
   }
 
-  getKnowledges() {
-    if(!this.knowledges) {
-      this.knowledges = [];
+  getDistances() {
+    if(!this.distances) {
+      this.distances = [];
     } else {
-      return this.knowledges;
+      return this.distances;
     }
 
-    for (let knowledge in datas.projet.knowledgePrio) {
-      this.knowledges.push(knowledge);
+    for (let day of this.metrics) {
+      this.distances.push(day.distance);
     }
 
-    return this.knowledges.sort();
+    return this.distances;
   }
 
-  getLevels() {
-    if(!this.levels) {
-      this.levels = [];
+  getCalories() {
+    if(!this.calories) {
+      this.calories = [];
     } else {
-      return this.levels;
+      return this.calories;
     }
 
-    for (let indicator in this.indicators) {
-      this.levels.push(this.indicators[indicator].levelAve);
+    for (let day of this.metrics) {
+      this.calories.push(day.calories);
     }
 
-    return this.levels;
+    return this.calories;
   }
 
-  getLevelMaxs() {
-    if(!this.levelMaxs) {
-      this.levelMaxs = [];
+  getDistOnCals() {
+    if(!this.distOnCals) {
+      this.distOnCals = [];
     } else {
-      return this.levelMaxs;
+      return this.distOnCals;
     }
 
-    for (let indicator in this.indicators) {
-      this.levelMaxs.push(this.indicators[indicator].levelMax);
+    for (let day of this.metrics) {
+      this.distOnCals.push(day.distOnCal);
     }
 
-    return this.levelMaxs;
-  }
-
-  getPeoples() {
-    if(!this.peopleUpLevel) {
-      this.peopleUpLevel = [];
-    } else {
-      return this.peopleUpLevel;
-    }
-
-    for (let indicator in this.indicators) {
-      this.peopleUpLevel.push(this.indicators[indicator].peopleUpLevel);
-    }
-
-    return this.peopleUpLevel;
-  }
-
-  getPrio(knowledge) {
-    const colors = ["#2980b9", "#e67e22", "#e74c3c"];
-
-    const prio = datas.projet.knowledgePrio[knowledge];
-
-    return colors[prio - 1];
+    return this.distOnCals;
   }
 }

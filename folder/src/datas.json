@@ -230,6 +230,34 @@
       "time": "45:23",
       "distance": "7.79",
       "calories": "1202"
+    },
+    {
+      "date": "16/12/2022",
+      "level": "10",
+      "time": "45:59",
+      "distance": "7.50",
+      "calories": "1201"
+    },
+    {
+      "date": "20/12/2022",
+      "level": "10",
+      "time": "44:11",
+      "distance": "7.49",
+      "calories": "1202"
+    },
+    {
+      "date": "22/12/2022",
+      "level": "10",
+      "time": "46:20",
+      "distance": "7.51",
+      "calories": "1204"
+    },
+    {
+      "date": "23/12/2022",
+      "level": "10",
+      "time": "45:24",
+      "distance": "7.49",
+      "calories": "1201"
     }
   ]
 }
